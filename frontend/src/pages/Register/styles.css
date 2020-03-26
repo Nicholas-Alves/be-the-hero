@@ -47,23 +47,6 @@
     margin-top: 8px;
 }
 
-.register-container .content form input.invalid {
-    margin-top: 8px;
-    border-color: rgba(255, 0, 0, 0.6);
-    transition: border-color 0.5s;
-}
-
-.register-container .content form input.invalid::placeholder {
-    transition: color 0.5s;
-    color: rgba(255, 0, 0, 0.6);
-}
-
-.register-container .content form input.valid {
-    margin-top: 8px;
-    transition: border-color 0.5s;
-    border-color: rgba(0, 255, 0, 0.6);
-}
-
 .register-container .content form .input-group {
     display: flex;
 }

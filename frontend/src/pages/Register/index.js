@@ -37,41 +37,39 @@ export default function Register(){
         for(var input of listInput){
             if(listInput.indexOf(input) === 2){ //whatsapp
                 if(whatsapp.trim().length < 15){
-                    input.classList.remove('valid');
-                    inputWhatsapp.classList.add('invalid');
+                    valid = setInput(input, false);
                     if(!firstInvalid) firstInvalid = inputWhatsapp;
-                    valid = false;
                 }
-                else{
-                    inputWhatsapp.classList.remove('invalid');
-                    inputWhatsapp.classList.add('valid');
-                }
+                else setInput(input, true);
             }else if (listInput.indexOf(input) === 4){
                 if(ufs.indexOf(uf) === -1){
-                    input.classList.remove('valid');
-                    inputUf.classList.add('invalid');
+                    valid = setInput(input, false);
                     if(!firstInvalid) firstInvalid = inputUf;
-                    valid = false;
                 }
-                else{
-                    inputUf.classList.remove('invalid');
-                    inputUf.classList.add('valid');
-                }
+                else setInput(input, true);
             }else{
                 if(input.value === ""){
-                    input.classList.remove('valid');
-                    input.classList.add('invalid');
+                    valid = setInput(input, false);
                     if(!firstInvalid) firstInvalid = input;
                     valid = false;
-                }else{
-                    input.classList.remove('invalid');
-                    input.classList.add('valid');
-                }
+                }else setInput(input, true);
             }
         }
 
         if(firstInvalid) firstInvalid.focus();
         return valid;
+    }
+
+    function setInput(input, valid){
+        if(valid){
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+            return true;
+        }else{
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+            return false;
+        }
     }
 
     async function handleRegister(event){
