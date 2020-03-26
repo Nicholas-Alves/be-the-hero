@@ -1,14 +1,82 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+
+import api from '../../services/api';
 
 import './styles.css';
 
 import logoImg from '../../assets/logo.svg';
 
 export default function NewIncident() {
-  return (
-    <div className="new-incident-container">
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [value, setValue] = useState('');
+
+    const history = useHistory();
+
+    const ongId = localStorage.getItem('ongId');
+
+    function validInputs(){
+        const inputs = [
+            document.getElementById('inputTitle'),
+            document.getElementById('inputDescription'),
+            document.getElementById('inputValue'),
+        ];
+
+        var valid = true;
+        var firstInvalid = null;
+
+        for(var input of inputs){
+            if(input.value === ""){
+                valid = setInput(input, false);
+                if(!firstInvalid) firstInvalid = input;
+            }else{
+                valid = setInput(input, true);
+            }
+        }
+        if(firstInvalid) firstInvalid.focus();
+        return valid;
+    }
+
+    function setInput(input, valid){
+        if(valid){
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+            return true;
+        }else{
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+            return false;
+        }
+    }
+
+    async function handleSubmit(event){
+        event.preventDefault();
+        try {
+            if(validInputs()){
+                const data = {
+                    title,
+                    description,
+                    value
+                }
+
+                await api.post('incidents', data, {
+                    headers: {
+                        Authorization: ongId,
+                    }
+                });
+
+                history.push('/profile');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erro ao cadastrar caso, tente novamente');
+        }
+    }
+
+    return (
+        <div className="new-incident-container">
             <div className="content">
                 <section>
                     <img src={logoImg} alt="Be The Hero"/>
@@ -22,13 +90,30 @@ export default function NewIncident() {
                 </section>
 
                 <form>
-                    <input placeholder="Título do caso"/>
-                    <textarea placeholder="Descrição"/>
-                    <input placeholder="Valor em reais"/>
+                    <input
+                        id="inputTitle"
+                        placeholder="Título do caso"
+                        value={title}
+                        onChange={event => setTitle(event.target.value)}
+                    />
 
-                    <button type="submit" className="button">Cadastrar</button>
+                    <textarea
+                        id="inputDescription"
+                        placeholder="Descrição"
+                        value={description}
+                        onChange={event => setDescription(event.target.value)}
+                    />
+
+                    <input
+                        id="inputValue"
+                        placeholder="Valor em reais"
+                        value={value}
+                        onChange={event => setValue(event.target.value)}
+                    />
+
+                    <button onClick={handleSubmit} type="submit" className="button">Cadastrar</button>
                 </form>
             </div>
         </div>
-  );
+    );
 }

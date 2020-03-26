@@ -41,8 +41,6 @@ module.exports = {
         const ong_id = req.headers.authorization; //ID da ONG logada
 
         const incident = await connection('incident').where('id', id).select('ong_id').first();
-
-        console.log(incident);
         
         if(incident.ong_id != ong_id) return res.status(401).json({ error: 'Operation not permited.' });
         

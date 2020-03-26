@@ -20,13 +20,13 @@ export default function Register(){
     const history = useHistory();
 
     function validInputs(){
-        const inputName = document.getElementById('inputName');
-        const inputEmail = document.getElementById('inputEmail');
-        const inputWhatsapp = document.getElementById('inputWhatsapp');
-        const inputCity = document.getElementById('inputCity');
-        const inputUf = document.getElementById('inputUf');
-
-        const listInput = [inputName, inputEmail, inputWhatsapp, inputCity, inputUf];
+        const inputs = [
+            document.getElementById('inputName'),    
+            document.getElementById('inputEmail'),
+            document.getElementById('inputWhatsapp'),
+            document.getElementById('inputCity'),
+            document.getElementById('inputUf')
+        ];
         
         var firstInvalid = null;
         var valid = true;
@@ -34,20 +34,20 @@ export default function Register(){
         'ES', 'GO', 'MA', 'MT' ,'MS' , 'MG', 'PA', 'PB', 'PE',
         'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
-        for(var input of listInput){
-            if(listInput.indexOf(input) === 2){ //whatsapp
+        for(var input of inputs){
+            if(inputs.indexOf(input) === 2){ //WhatsApp
                 if(whatsapp.trim().length < 15){
                     valid = setInput(input, false);
-                    if(!firstInvalid) firstInvalid = inputWhatsapp;
+                    if(!firstInvalid) firstInvalid = input;
                 }
                 else setInput(input, true);
-            }else if (listInput.indexOf(input) === 4){
+            }else if (inputs.indexOf(input) === 4){ //UF
                 if(ufs.indexOf(uf) === -1){
                     valid = setInput(input, false);
-                    if(!firstInvalid) firstInvalid = inputUf;
+                    if(!firstInvalid) firstInvalid = input;
                 }
                 else setInput(input, true);
-            }else{
+            }else{ //Name, Email, City
                 if(input.value === ""){
                     valid = setInput(input, false);
                     if(!firstInvalid) firstInvalid = input;

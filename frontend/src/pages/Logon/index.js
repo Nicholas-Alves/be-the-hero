@@ -9,8 +9,7 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
 
-export default function(){
-    
+export default function(){    
     const [id, setId] = useState('');
 
     const history = useHistory();
@@ -35,9 +34,7 @@ export default function(){
         try {
             const inputId = document.getElementById('inputId')
             if(validInputs(inputId)){                
-                const res = await api.post('sessions', { id })
-
-                console.log(res);
+                const res = await api.post('sessions', { id });
 
                 if(res.data === null) setInput(document.getElementById('inputId'), false);
                 else setInput(inputId, true);

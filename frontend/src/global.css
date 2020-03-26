@@ -42,7 +42,6 @@ form textarea{
 }
 
 form .invalid {
-    margin-top: 8px;
     border-color: rgba(255, 0, 0, 0.6);
     transition: border-color 0.5s;
 }
@@ -53,7 +52,6 @@ form .invalid::placeholder {
 }
 
 form .valid {
-    margin-top: 8px;
     transition: border-color 0.5s;
     border-color: rgba(0, 255, 0, 0.6);
 }
