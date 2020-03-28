@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import InputMask from 'react-input-mask';
+import { motion } from 'framer-motion';
 
 import api from '../../services/api';
 
@@ -18,6 +19,21 @@ export default function Register(){
     const [uf, setUf] = useState('');
 
     const history = useHistory();
+
+    const variants = {
+        in: {
+            opacity: 1,
+            x: 0
+        },
+        out: {
+            opacity: 0,
+            x: "100vw"
+        }
+    }
+
+    const transitions ={        
+        duration: 1.25
+    }
 
     function validInputs(){
         const inputs = [
@@ -98,7 +114,14 @@ export default function Register(){
     }
 
     return(
-        <div className="register-container">
+        <motion.div
+            className="register-container"
+            initial="out"
+            animate="in"
+            exit="out"
+            variants={variants}
+            transition={transitions}
+        >
             <div className="content">
                 <section>
                     <img src={logoImg} alt="Be The Hero"/>
@@ -155,6 +178,6 @@ export default function Register(){
                     <button type="submit" className="button">Cadastrar</button>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 }

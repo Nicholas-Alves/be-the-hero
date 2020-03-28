@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 import api from '../../services/api';
 
@@ -11,10 +12,26 @@ import logoImg from '../../assets/logo.svg';
 export default function Profile() {
     const ongId = localStorage.getItem('ongId');
     const ongName = localStorage.getItem('ongName');
-
+    
     const [incidents, setIncidents] = useState([])
 
+    //[<boolean>, <incident_id>]
+    const [excluding, setExcluding] = useState({});
+
     const history = useHistory();
+
+    const variants = {
+        in: {
+            opacity: 1
+        },
+        out: {
+            opacity: 0
+        }
+    }
+    
+    const transitions = {
+        duration: 1
+    }
 
     useEffect(() => {
         api.get('profile', {
@@ -33,6 +50,7 @@ export default function Profile() {
                     Authorization: ongId,
                 }
             });
+            setExcluding({ex: false, id: null});
             setIncidents(incidents.filter(incident => incident.id !== id));
         } catch (error) {
             console.log(error);
@@ -48,7 +66,14 @@ export default function Profile() {
     }
 
     return (
-        <div className="profile-container">
+        <motion.div
+            className="profile-container"
+            initial={"out"}
+            animate={"in"}
+            exit={"out"}            
+            variants={variants}
+            transition={transitions}
+        >
             <header>
                 <img src={logoImg} alt="Be The Hero"/>
                 <span>Bem vinda, {ongName}</span>
@@ -62,22 +87,32 @@ export default function Profile() {
 
             <ul>
                 {incidents.map(incident => (
-                    <li key={incident.id}>
-                        <strong>CASO:</strong>
-                        <p>{incident.title}</p>
+                    <motion.li
+                        key={incident.id}
+                        initial={{opacity: 0}}
+                        animate={excluding.ex === true && excluding.id === incident.id ? {opacity: 0} : {opacity: 1}}
+                        whileHover={{scale: 1.03}}
+                    >
+                        <div className="li-content">
+                            <strong>CASO:</strong>
+                            <p>{incident.title}</p>
 
-                        <strong>DESCRIÇÃO</strong>
-                        <p>{incident.description}</p>
+                            <strong>DESCRIÇÃO</strong>
+                            <p>{incident.description}</p>
 
-                        <strong>VALOR</strong>
-                        <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
+                            <strong>VALOR</strong>
+                            <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
 
-                        <button onClick={() => handleDeleteIncident(incident.id)} type="button">
-                            <FiTrash2 sixe={20} color="#a8a8b3" />
-                        </button>
-                    </li>
+                            <button onClick={() => {
+                                setExcluding({ex: true, id: incident.id});
+                                setTimeout(() => handleDeleteIncident(incident.id), 200);
+                            }} type="button">
+                                <FiTrash2 sixe={20} color="#a8a8b3" />
+                            </button>
+                        </div>
+                    </motion.li>
                 ))}                
             </ul>
-        </div>
+        </motion.div>
     );
 }

@@ -6,7 +6,8 @@
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
+    overflow: visible;
 }
 
 .register-container .content {
@@ -18,7 +19,7 @@
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
 }
 
 .register-container .content section {
