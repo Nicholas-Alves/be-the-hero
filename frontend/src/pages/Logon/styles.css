@@ -1,4 +1,4 @@
-.logon-container {
+.logon-container .content {
     width: 100%;
     max-width: 1120px;
     height: 100vh;
@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 
-.logon-container section.form {
+.logon-container .content section.form {
     width: 100%;
     max-width: 350px;
     margin-right: 30px;

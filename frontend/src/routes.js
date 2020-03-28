@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 import Logon from './pages/Logon';
 import Register from './pages/Register';
@@ -7,14 +8,15 @@ import Profile from './pages/Profile';
 import NewIncident from './pages/NewIncident';
 
 export default function Routes(){
+    const location = useLocation();
     return (
-        <BrowserRouter>
-            <Switch>
+        <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.pathname}>
                 <Route path="/" exact component={ Logon } />
                 <Route path="/register" component={ Register } />
                 <Route path="/profile" component={ Profile } />
                 <Route path="/incidents/new" component={ NewIncident } />
             </Switch>
-        </BrowserRouter>
+        </AnimatePresence>
     );
 }
