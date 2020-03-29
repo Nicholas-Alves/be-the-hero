@@ -15,8 +15,7 @@ export default function Profile() {
     
     const [incidents, setIncidents] = useState([])
 
-    //[<boolean>, <incident_id>]
-    const [excluding, setExcluding] = useState({});
+    const [isExcluding, setExcluding] = useState({});
 
     const history = useHistory();
 
@@ -90,7 +89,7 @@ export default function Profile() {
                     <motion.li
                         key={incident.id}
                         initial={{opacity: 0}}
-                        animate={excluding.ex === true && excluding.id === incident.id ? {opacity: 0} : {opacity: 1}}
+                        animate={isExcluding.ex === true && isExcluding.id === incident.id ? {opacity: 0} : {opacity: 1}}
                         whileHover={{scale: 1.03}}
                     >
                         <div className="li-content">

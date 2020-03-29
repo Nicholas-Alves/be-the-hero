@@ -19,20 +19,20 @@ export default function Incidents(){
     const navigation = useNavigation();
 
     async function loadIncidents() {
-        if(isLoading || (totalIncidents > 0 && incidents.length === totalIncidents)) return;
+        if(isLoading) return;
 
-        setLoading(true);
-
+        if(totalIncidents > 0 && incidents.length == totalIncidents) return;        
+        
         const res = await api.get('incidents', {
             params: { page }
         });
-
-        setIncidents([...incidents, ...res.data]);
+    
+        setLoading(true);
+        setIncidents([... incidents, ... res.data]);
         setTotalIncidents(res.headers['x-total-count']);
         setPage(page + 1);
-
         setLoading(false);
-    }
+    }    
 
     useEffect(() => {
         loadIncidents();
@@ -44,7 +44,7 @@ export default function Incidents(){
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image source={logoImg} />
+                <Image source={logoImg}/>
                 <Text style={styles.headerText}>
                     Total de <Text style={styles.headerTextBold}>{totalIncidents} casos</Text>.
                 </Text>
