@@ -6,7 +6,7 @@ module.exports = {
 
         const ong = await connection('ong').where('id', id).select('name').first();
 
-        if(!ong) return res.status(406).send({ name: null, error: 'No ONG found with this ID.' });
+        if(!ong) return res.status(406).send({ error: 'No ONG found with this ID.' });
         
         return res.json(ong);
     }
