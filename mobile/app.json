@@ -25,6 +25,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.nicholasalves.bethehero",
+      "versionCode": 1
     }
   }
 }
