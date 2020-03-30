@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
     return knex.schema.createTable('incident', function(table){
         //Primary Key

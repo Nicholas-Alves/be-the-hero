@@ -51,18 +51,14 @@ export default function(){
         try {
             if(validInputs(inputId)){                
                 const res = await api.post('sessions', { id });
-                
+                                
                 setInput(inputId, true);
                 localStorage.setItem('ongId', id);
                 localStorage.setItem('ongName', res.data.name);
                 setTimeout(() => history.push('/profile'), 300);                
             }else setInput(inputId, false);
         } catch (error) {
-            var errorCode = error.message[32];
-            errorCode += error.message[33];
-            errorCode += error.message[34];
-
-            if(errorCode === '406') setInput(inputId, false);
+            if(error.response.status === '400' || error.response.status === '406') setInput(inputId, false);
             alert('Erro no login, tente novamente');            
         }
     }

@@ -2,10 +2,19 @@ const express = require('express');
 
 const routes = express.Router();
 
-const OngController = require('./controllers/OngController');
+//CONTROLLERS
 const IncidentController = require('./controllers/IncidentController');
+const OngController = require('./controllers/OngController');
 const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
+
+//VALIDATORS
+const IncidentGet = require('./validators/Incident/Get');
+const IncidentPost = require('./validators/Incident/Post');
+const IncidentDelete = require('./validators/Incident/Delete');
+const OngPost = require('./validators/Ong/Post');
+const ProfileGet = require('./validators/Profile/Get');
+const SessionPost = require('./validators/Session/Post');
 
 /**
  * Métodos HTTP:
@@ -30,19 +39,25 @@ const SessionController = require('./controllers/SessionController');
   */
 
 
-//Session
-routes.post('/sessions', SessionController.create);
+
+/** ROUTES
+ * Format: (route, validator, controller.method)
+ */
+
+
+//Incidents
+routes.get('/incidents', IncidentGet, IncidentController.index);
+routes.post('/incidents', IncidentPost, IncidentController.create);
+routes.delete('/incidents/:id', IncidentDelete, IncidentController.delete);
 
 //ONGS
 routes.get('/ongs', OngController.index);
-routes.post('/ongs', OngController.create);
-
-//Incidents
-routes.get('/incidents', IncidentController.index);
-routes.post('/incidents', IncidentController.create);
-routes.delete('/incidents/:id', IncidentController.delete);
+routes.post('/ongs', OngPost, OngController.create);
 
 //Profile
-routes.get('/profile', ProfileController.index);
+routes.get('/profile', ProfileGet, ProfileController.index);
+
+//Session
+routes.post('/sessions', SessionPost, SessionController.create);
 
 module.exports = routes;
