@@ -6,8 +6,7 @@
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,6 +16,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#E02041"
     },
+    "primaryColor": "#E02041",
     "updates": {
       "fallbackToCacheTimeout": 0
     },

@@ -69,7 +69,7 @@ export default function Incidents(){
 
                         <Text style={styles.incidentItemProperty}>VALOR:</Text>
                         <Text style={styles.incidentItemValue}>
-                            {`R$ ${incident.value.toFixed(2)}`}</Text>
+                            {incident.value}</Text>
                         <TouchableOpacity
                             style={styles.detailsButton}
                             onPress={() => navigateToDetail(incident)}
