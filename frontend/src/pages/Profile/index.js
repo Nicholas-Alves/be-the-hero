@@ -101,7 +101,7 @@ export default function Profile() {
                             <p>{incident.description}</p>
 
                             <strong>VALOR</strong>
-                            <p>{incident.value.toFixed(2)}</p>
+                            <p>{incident.value}</p>
 
                             <button onClick={() => {
                                 setExcluding({ex: true, id: incident.id});
