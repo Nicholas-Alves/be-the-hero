@@ -101,7 +101,7 @@ export default function Profile() {
                             <p>{incident.description}</p>
 
                             <strong>VALOR</strong>
-                            <p>{incident.value}</p>
+                            <p>{`R$ ${incident.value}`}</p>
 
                             <button onClick={() => {
                                 setExcluding({ex: true, id: incident.id});
