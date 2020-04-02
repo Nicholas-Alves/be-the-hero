@@ -64,10 +64,12 @@ export default function Details(){
 
                 <View style={styles.groupActions}>
                     <TouchableOpacity style={styles.action} onPress={sendWhatsapp} >
+                        <Feather name="message-circle" size={36} color="#FFF"/>
                         <Text style={styles.actionText}>WhatsApp</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.action} onPress={sendMail} >
+                        <Feather name="mail" size={36} color="#FFF"/>
                         <Text style={styles.actionText}>E-mail</Text>
                     </TouchableOpacity>
                 </View>

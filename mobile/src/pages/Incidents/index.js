@@ -68,8 +68,7 @@ export default function Incidents(){
                         <Text style={styles.incidentItemValue}>{incident.title}</Text>
 
                         <Text style={styles.incidentItemProperty}>VALOR:</Text>
-                        <Text style={styles.incidentItemValue}>
-                            {incident.value}</Text>
+                        <Text style={styles.incidentItemValue}>{incident.value}</Text>
                         <TouchableOpacity
                             style={styles.detailsButton}
                             onPress={() => navigateToDetail(incident)}

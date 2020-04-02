@@ -63,19 +63,18 @@ export default StyleSheet.create({
     },
 
     action: {
+        flexDirection: 'row',
         backgroundColor: '#e02041',
         borderRadius: 8,
         height: 50,
         width: '48%',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',        
     },
 
     actionText: {
         color: '#FFF',
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: 'bold',
     }
-
-
 })
