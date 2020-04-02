@@ -15,7 +15,7 @@ export default function Details(){
 
     const incident = route.params.incident;
 
-    const message = `Olá ${incident.name}, estou entrando em contato pois gostaria de ajudar no caso "${incident.title}" com o valor de R$ ${incident.value}.`
+    const message = `Olá ${incident.name}, estou entrando em contato pois gostaria de ajudar no caso "${incident.title}" com o valor de R$ ${incident.value.toFixed(2)}.`
 
     function navigateBack(){
         navigation.goBack();
@@ -53,7 +53,7 @@ export default function Details(){
                 <Text style={styles.incidentItemValue}>{incident.description}</Text>
 
                 <Text style={styles.incidentItemProperty}>VALOR:</Text>
-                <Text style={[styles.incidentItemValue, {marginBottom: 0}]}>{incident.value}</Text>
+                <Text style={[styles.incidentItemValue, {marginBottom: 0}]}>{`R$ ${incident.value.toFixed(2)}`}</Text>
             </View>
 
             <View style={styles.contactBox}>
