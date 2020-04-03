@@ -3,6 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { View, TouchableOpacity, Image, Text, Linking } from 'react-native'
 import { Feather } from '@expo/vector-icons';
+import whatsappIcon from '../../assets/whatsapp.png';
 import * as MailComposer from 'expo-mail-composer';
 
 import styles from './styles';
@@ -64,7 +65,7 @@ export default function Details(){
 
                 <View style={styles.groupActions}>
                     <TouchableOpacity style={styles.action} onPress={sendWhatsapp} >
-                        <Feather name="message-circle" size={36} color="#FFF"/>
+                        <Image source={whatsappIcon} style={styles.whatsappIcon} />
                         <Text style={styles.actionText}>WhatsApp</Text>
                     </TouchableOpacity>
 

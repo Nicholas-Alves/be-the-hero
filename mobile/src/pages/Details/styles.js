@@ -76,5 +76,11 @@ export default StyleSheet.create({
         color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+
+    whatsappIcon: {
+        width: 36,
+        height: 36,
+        resizeMode: 'contain',
     }
 })

@@ -41,6 +41,7 @@ export default function Incidents(){
     function navigateToDetail(incident) {
         navigation.navigate('Details', { incident })
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
